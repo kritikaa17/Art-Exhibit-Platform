@@ -1,0 +1,68 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<main class="main">
+    <div class="page-header mt-30 mb-75">
+        <div class="container">
+            <div class="archive-header">
+                <div class="row align-items-center">
+                    <div class="col-xl-3">
+                        <h1 class="mb-15"># {{ tag.name }}</h1>
+                        <div class="breadcrumb">
+                            <a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                            <span></span> {{ tag.name }}
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+    <div class="page-content mb-50">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-9">
+                    <div class="shop-product-fillter">
+                        <div class="totall-product">
+                            <p>
+                               We found <strong class = "text-brand">{{products.count}}</strong> items for you!
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="loop-grid pr-30">
+                        
+                        <div class="row">
+                            
+                            {% for product in products %}
+                            <article class="col-xl-4 col-lg-6 col-md-6 text-center hover-up mb-30 animated">
+                                <div class="post-thumb">
+                                    <a href="{% url 'core:product-detail' product.pid %}">
+                                        <img class="border-radius-10" src="{{ product.image.url }}" alt="{{ product.title }}" />
+                                    </a>
+                                </div>
+                                <div class="entry-content-2">
+                                    <h4 class="post-title mb-15">
+                                        <a href="{% url 'core:product-detail' product.pid %}">{{ product.title }}</a>
+                                    </h4>
+                                    <div class="entry-meta font-xs color-grey mt-10 pb-10">
+                                        <span class="hit-count mr-10">{{ product.artist }}</span>
+                                        <span class="hit-count mr-10">{{ product.mfd }}</span>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
